@@ -1,0 +1,51 @@
+/// <reference types="node" />
+import { Repository } from 'typeorm';
+import { Employee } from './entities/Employee.entity';
+import { UpdateEmployeeDto } from './dto/update-employee.dto';
+import { AuthService } from 'src/auth/auth.service';
+import { UserCredentials } from 'src/auth/entities/UserCredentials.entity';
+import { MailService } from 'src/mail/mail.service';
+import { Inventory } from 'src/inventory/entities/inventory.entity';
+import { InventoryService } from 'src/inventory/inventory.service';
+export declare class EmployeeService {
+    private readonly employeeRepository;
+    private readonly userCredentialRepository;
+    private readonly inventoryRepository;
+    private readonly inventoryService;
+    private readonly authService;
+    private readonly mailService;
+    constructor(employeeRepository: Repository<Employee>, userCredentialRepository: Repository<UserCredentials>, inventoryRepository: Repository<Inventory>, inventoryService: InventoryService, authService: AuthService, mailService: MailService);
+    updateEmployee(id: number, updatedEmployeeDetails: UpdateEmployeeDto, req_mail: any): Promise<Employee>;
+    deleteEmployee(id: number, req_mail: string): Promise<string>;
+    showProfile(id: number): Promise<any>;
+    findEmployees(): Promise<{
+        role: any;
+        id: number;
+        name: string;
+        email: string;
+        mobile_number: string;
+        dob: Date;
+        gender: string;
+        created_at: Date;
+        created_by: string;
+        updated_at: Date;
+        updated_by: string;
+        deleted_at: Date;
+        deleted_by: string;
+        manager_id: number;
+        manager: Employee;
+        department_id: number;
+        department: import("../department/entity/Department.entity").Department;
+        admin: boolean;
+        image: Buffer;
+        leaveRequests: import("../leave_types_and_requests/entities/LeaveRequest.entity").LeaveRequest[];
+        inventories: Inventory[];
+        projects: import("../project/entities/project.entity").Project[];
+        project: import("../project/entities/project.entity").Project[];
+        userOtp: import("../auth/entities/userOtp.entity").UserOtp;
+    }[]>;
+    uploadImage(employeeId: number, imageData: Buffer): Promise<Employee>;
+    findAll(): Promise<Employee[]>;
+    findById(id: number): Promise<Employee | null>;
+    getManagerIds(): Promise<any[]>;
+}
