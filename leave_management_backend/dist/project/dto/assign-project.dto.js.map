@@ -1,0 +1,1 @@
+{"version":3,"file":"assign-project.dto.js","sourceRoot":"","sources":["../../../src/project/dto/assign-project.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,6CAA8C;AAE9C,MAAa,gBAAgB;CAW5B;AAXD,4CAWC;AANC;IAHC,IAAA,qBAAW,EAAC;QACX,WAAW,EAAE,gBAAgB;KAC9B,CAAC;;oDACiB;AAKnB;IAHC,IAAA,qBAAW,EAAC;QACX,WAAW,EAAE,eAAe;KAC7B,CAAC;;mDACgB"}
