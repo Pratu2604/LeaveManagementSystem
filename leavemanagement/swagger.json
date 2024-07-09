@@ -1,0 +1,1551 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/employees": {
+      "post": {
+        "operationId": "EmployeeController_createEmployee",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateEmployeeDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "created user object as response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Employee" }
+              }
+            }
+          }
+        },
+        "tags": ["Employees"],
+        "security": [{ "JWT-auth": [] }]
+      },
+      "get": {
+        "operationId": "EmployeeController_showEmployeeList",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "All employees List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Employee" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Employees"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/employees/{id}": {
+      "put": {
+        "operationId": "EmployeeController_updateEmployee",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateEmployeeDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Employee with given ID will be updated as response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Employee" }
+              }
+            }
+          }
+        },
+        "tags": ["Employees"],
+        "security": [{ "JWT-auth": [] }]
+      },
+      "delete": {
+        "operationId": "EmployeeController_deleteEmployee",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee with given ID will be deleted as response"
+          }
+        },
+        "tags": ["Employees"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/employees/employee/{id}": {
+      "get": {
+        "operationId": "EmployeeController_showProfile",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get employee by id",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Employee" }
+              }
+            }
+          }
+        },
+        "tags": ["Employees"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/employees/manager": {
+      "get": {
+        "operationId": "EmployeeController_showManagerList",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Employees"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/employees/upload-image/{id}": {
+      "post": {
+        "operationId": "EmployeeController_uploadImage",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": { "201": { "description": "" } },
+        "tags": ["Employees"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/leave": {
+      "post": {
+        "operationId": "LeaveTypesAndRequestsController_createRequest",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLeaveTypesAndRequestDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Leave request created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LeaveRequest" }
+              }
+            }
+          }
+        },
+        "tags": ["Leave Request"],
+        "security": [{ "JWT-auth": [] }]
+      },
+      "get": {
+        "operationId": "LeaveTypesAndRequestsController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all leave requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/LeaveRequest" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Leave Request"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/leave/{leave_request_id}": {
+      "get": {
+        "operationId": "LeaveTypesAndRequestsController_findOne",
+        "parameters": [
+          {
+            "name": "leave_request_id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get leave requests of employee with given id",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LeaveRequest" }
+              }
+            }
+          }
+        },
+        "tags": ["Leave Request"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/leave/{leave_request_id}/status": {
+      "put": {
+        "operationId": "LeaveTypesAndRequestsController_updateStatus",
+        "parameters": [
+          {
+            "name": "leave_request_id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateLeaveStatus" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "leave request status will be updated as response"
+          }
+        },
+        "tags": ["Leave Request"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/leave/employees/pending-requests": {
+      "get": {
+        "operationId": "LeaveTypesAndRequestsController_getEmployeesWithPendingRequests",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get employee list whose leave request status is pending"
+          }
+        },
+        "tags": ["Leave Request"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/leave/remaining-balance/{empId}": {
+      "get": {
+        "operationId": "LeaveTypesAndRequestsController_getRemainingLeaveBalance",
+        "parameters": [
+          {
+            "name": "empId",
+            "required": true,
+            "in": "path",
+            "description": "Employee ID",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Leave Request"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/leave/remaining-balance/work-from-home/{empId}": {
+      "get": {
+        "operationId": "LeaveTypesAndRequestsController_getRemainingLeaveBalanceforworkfromhome",
+        "parameters": [
+          {
+            "name": "empId",
+            "required": true,
+            "in": "path",
+            "description": "Employee ID",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Leave Request"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "operationId": "AuthController_login",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AuthPayloadDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "Get Authentication Token" } },
+        "tags": ["Authentication"]
+      }
+    },
+    "/auth/forgotpassword": {
+      "post": {
+        "operationId": "AuthController_forgotPassword",
+        "parameters": [],
+        "responses": { "201": { "description": "" } },
+        "tags": ["Authentication"]
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "operationId": "AuthController_resetPasswordWithOTP",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ResetPasswordDto" }
+            }
+          }
+        },
+        "responses": { "201": { "description": "" } },
+        "tags": ["Authentication"]
+      }
+    },
+    "/department": {
+      "post": {
+        "operationId": "DepartmentController_createDepartment",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateDepartmentDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "created department object as response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Department" }
+              }
+            }
+          }
+        },
+        "tags": ["Department"],
+        "security": [{ "JWT-auth": [] }]
+      },
+      "get": {
+        "operationId": "DepartmentController_showDepartmentList",
+        "parameters": [],
+        "responses": { "200": { "description": "" } },
+        "tags": ["Department"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/department/{id}": {
+      "delete": {
+        "operationId": "DepartmentController_deleteDepartment",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "department will be deleted as response" }
+        },
+        "tags": ["Department"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/inventory": {
+      "post": {
+        "operationId": "InventoryController_createInventory",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateInventoryDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Inventory will be created as response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Inventory" }
+              }
+            }
+          }
+        },
+        "tags": ["Inventory"],
+        "security": [{ "JWT-auth": [] }]
+      },
+      "get": {
+        "operationId": "InventoryController_findAllInventories",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get List of all Inventories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Inventory" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Inventory"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/inventory/oneInventory/{id}": {
+      "get": {
+        "operationId": "InventoryController_findOneInventory",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Inventory of given ID",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Inventory" }
+              }
+            }
+          }
+        },
+        "tags": ["Inventory"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/inventory/{id}": {
+      "patch": {
+        "operationId": "InventoryController_updateInventory",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateInventoryDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Inventory will be updated as response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Inventory" }
+              }
+            }
+          }
+        },
+        "tags": ["Inventory"],
+        "security": [{ "JWT-auth": [] }]
+      },
+      "delete": {
+        "operationId": "InventoryController_deleteInventory",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Inventory will be deleted as response" }
+        },
+        "tags": ["Inventory"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/inventory/assign/{employeeId}": {
+      "post": {
+        "operationId": "InventoryController_assignInventory",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateInventoryDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Assign Inventory to given Employee Id" }
+        },
+        "tags": ["Inventory"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/inventory/assigned/{employeeId}": {
+      "get": {
+        "operationId": "InventoryController_getAssignedInventory",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get list of Inventories assigned to given employee ID",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Inventory" }
+              }
+            }
+          }
+        },
+        "tags": ["Inventory"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/inventory/category": {
+      "post": {
+        "operationId": "InventoryController_createCategory",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInvetoryCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Category will be created as response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Category" }
+              }
+            }
+          }
+        },
+        "tags": ["Inventory"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/inventory/allCategory": {
+      "get": {
+        "operationId": "InventoryController_findAllCategory",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get List Of All Categories of Inventories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Category" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Inventory"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/project": {
+      "post": {
+        "operationId": "ProjectController_addProject",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateProjectDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Project will be added as response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          }
+        },
+        "tags": ["Project"],
+        "security": [{ "JWT-auth": [] }]
+      },
+      "get": {
+        "operationId": "ProjectController_findAllProject",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "All project List",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Project" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["Project"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/project/{id}": {
+      "get": {
+        "operationId": "ProjectController_findOneProject",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The project with given ID",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          }
+        },
+        "tags": ["Project"],
+        "security": [{ "JWT-auth": [] }]
+      },
+      "patch": {
+        "operationId": "ProjectController_updateProject",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/UpdateProjectDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "project will be updated as response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          }
+        },
+        "tags": ["Project"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/project/{adminId}": {
+      "post": {
+        "operationId": "ProjectController_assignProject",
+        "parameters": [
+          {
+            "name": "adminId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/AssignProjectDto" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "project will be assigned to employee",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          }
+        },
+        "tags": ["Project"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/project/{projectId}/assigned-employees": {
+      "get": {
+        "operationId": "ProjectController_getAssignedEmployees",
+        "parameters": [
+          {
+            "name": "projectId",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get list of employees who are assigned the project of given ID"
+          }
+        },
+        "tags": ["Project"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/project/status/{project_id}": {
+      "put": {
+        "operationId": "ProjectController_updateProjectStatus",
+        "parameters": [
+          {
+            "name": "project_id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "status of the project will be updated as response",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" }
+              }
+            }
+          }
+        },
+        "tags": ["Project"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/holidays/upload": {
+      "post": {
+        "operationId": "HolidaysController_uploadImage",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Holidays" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "create holiday object ",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Holidays" }
+              }
+            }
+          }
+        },
+        "tags": ["holidays"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/holidays": {
+      "get": {
+        "operationId": "HolidaysController_getAllHolidays",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get all Holidays",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Holidays" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["holidays"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/holidays/upcoming": {
+      "get": {
+        "operationId": "HolidaysController_getUpcomingHolidays",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Get upcoming Holidays",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Holidays" }
+                }
+              }
+            }
+          }
+        },
+        "tags": ["holidays"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/holidays/{id}": {
+      "delete": {
+        "operationId": "HolidaysController_deleteEmployee",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": { "type": "number" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee with given ID will be deleted as response"
+          }
+        },
+        "tags": ["holidays"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    },
+    "/holidays/remaining-holidays": {
+      "get": {
+        "operationId": "HolidaysController_getRemainingHolidays",
+        "parameters": [],
+        "responses": { "200": { "description": "Get remaining holidays" } },
+        "tags": ["holidays"],
+        "security": [{ "JWT-auth": [] }]
+      }
+    }
+  },
+  "info": {
+    "title": "Leave Management API",
+    "description": "leave management api description",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "JWT-auth": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http",
+        "name": "JWT",
+        "description": "Enter JWT Token",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "CreateEmployeeDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the employee",
+            "example": "ABC"
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the employee",
+            "example": "abc@gmail.com"
+          },
+          "mobile_number": {
+            "type": "string",
+            "description": "The contact number of the employee",
+            "example": "7654567823"
+          },
+          "department_id": {
+            "type": "number",
+            "description": "The department id of the employee",
+            "example": 1
+          },
+          "role": {
+            "type": "string",
+            "description": "The role of the employee",
+            "example": "employee"
+          },
+          "dob": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date of birth of employee",
+            "example": "2003-05-08"
+          },
+          "gender": {
+            "type": "string",
+            "description": "The gender of the employee (Male/Female/Other)",
+            "example": "Female"
+          },
+          "manager_id": {
+            "type": "number",
+            "description": "The manager id of the employee",
+            "example": 1
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "mobile_number",
+          "department_id",
+          "role",
+          "dob",
+          "gender",
+          "manager_id"
+        ]
+      },
+      "Department": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "The department id " },
+          "department_name": {
+            "type": "string",
+            "description": "The department name "
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "the date on which department created"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "department created by"
+          },
+          "deleted_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date on which department deleted"
+          },
+          "deleted_by": {
+            "type": "string",
+            "description": "department deleted by"
+          },
+          "employees": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": [
+          "id",
+          "department_name",
+          "created_at",
+          "created_by",
+          "deleted_at",
+          "deleted_by",
+          "employees"
+        ]
+      },
+      "Buffer": { "type": "object", "properties": {} },
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "The id of Employee" },
+          "name": { "type": "string", "description": "The name of Employee" },
+          "email": { "type": "string", "description": "The email of Employee" },
+          "mobile_number": {
+            "type": "string",
+            "description": "The mobile number of Employee"
+          },
+          "dob": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date of birth of Employee"
+          },
+          "gender": {
+            "type": "string",
+            "description": "The gender of Employee"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When employee was Created"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "employee created by"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When employee was Updated"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "Employee Updated By"
+          },
+          "deleted_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date at which employee deleted"
+          },
+          "deleted_by": {
+            "type": "string",
+            "description": "employee deleted by"
+          },
+          "manager_id": {
+            "type": "number",
+            "description": "The manager id of Employee"
+          },
+          "manager": { "$ref": "#/components/schemas/Employee" },
+          "department_id": {
+            "type": "number",
+            "description": "The department id of Employee"
+          },
+          "department": { "$ref": "#/components/schemas/Department" },
+          "role": { "type": "string", "description": "The role of employee" },
+          "image": {
+            "description": "occasion image",
+            "allOf": [{ "$ref": "#/components/schemas/Buffer" }]
+          },
+          "inventories": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": [
+          "id",
+          "name",
+          "email",
+          "mobile_number",
+          "dob",
+          "gender",
+          "created_at",
+          "created_by",
+          "updated_at",
+          "updated_by",
+          "deleted_at",
+          "deleted_by",
+          "manager_id",
+          "manager",
+          "department_id",
+          "department",
+          "role",
+          "image",
+          "inventories"
+        ]
+      },
+      "UpdateEmployeeDto": { "type": "object", "properties": {} },
+      "CreateLeaveTypesAndRequestDto": {
+        "type": "object",
+        "properties": {
+          "emp_id": {
+            "type": "number",
+            "description": "id of employee",
+            "example": "1"
+          },
+          "leave_type": {
+            "type": "string",
+            "description": "the type of leave",
+            "example": "full"
+          },
+          "start_date": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The start date of leave",
+            "example": "2024-04-10"
+          },
+          "end_date": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The end date of leave",
+            "example": "2024-04-11"
+          },
+          "reason": {
+            "type": "string",
+            "description": "the reason for leave",
+            "example": "health issue"
+          }
+        },
+        "required": ["emp_id", "leave_type", "start_date", "end_date", "reason"]
+      },
+      "LeaveRequest": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "The id of leave request" },
+          "emp_id": { "type": "number", "description": "the id of employee" },
+          "leave_type": {
+            "type": "string",
+            "description": "the type of leave"
+          },
+          "start_date": {
+            "format": "date-time",
+            "type": "string",
+            "description": "start date for leave"
+          },
+          "end_date": {
+            "format": "date-time",
+            "type": "string",
+            "description": "end date for leave"
+          },
+          "reason": { "type": "string", "description": "reason for the leave" },
+          "status": {
+            "type": "string",
+            "description": "status of leave request"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date at which leave request created"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "leave request created by "
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date at which leave request updated"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "The leave request updated by"
+          }
+        },
+        "required": [
+          "id",
+          "emp_id",
+          "leave_type",
+          "start_date",
+          "end_date",
+          "reason",
+          "status",
+          "created_at",
+          "created_by",
+          "updated_at",
+          "updated_by"
+        ]
+      },
+      "UpdateLeaveStatus": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "status of leave request",
+            "example": "pending"
+          }
+        },
+        "required": ["status"]
+      },
+      "AuthPayloadDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email of Employee",
+            "example": "abc@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "password of employee"
+          }
+        },
+        "required": ["email", "password"]
+      },
+      "ResetPasswordDto": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "description": "email of employee" },
+          "otp": { "type": "string", "description": "otp for verification" },
+          "newPassword": {
+            "type": "string",
+            "description": "new password of employee"
+          },
+          "confirmPassword": {
+            "type": "string",
+            "description": "confirm new password of employee"
+          }
+        },
+        "required": ["email", "otp", "newPassword", "confirmPassword"]
+      },
+      "CreateDepartmentDto": {
+        "type": "object",
+        "properties": {
+          "department_name": {
+            "type": "string",
+            "description": "The name of the department",
+            "example": "Testing"
+          }
+        },
+        "required": ["department_name"]
+      },
+      "CreateInventoryDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "name of inventory" },
+          "serial_number": {
+            "type": "string",
+            "description": "serial no. of inventory"
+          }
+        },
+        "required": ["name", "serial_number"]
+      },
+      "CreateInvetoryCategoryDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "Name of the Category" }
+        },
+        "required": ["name"]
+      },
+      "Inventory": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "Id of the Inventory" },
+          "name": { "type": "string", "description": "Name of the Inventory" },
+          "serial_number": {
+            "type": "string",
+            "description": "serial Number of the Inventory"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date time at which inventory created"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "Inventory created by"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date time at which inventory updated"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "Inventory updated by"
+          },
+          "deleted_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date time at which inventory deleted"
+          },
+          "deleted_by": {
+            "type": "string",
+            "description": "Inventory deleted by"
+          },
+          "employee": {
+            "description": "Employee who have inventory",
+            "allOf": [{ "$ref": "#/components/schemas/CreateEmployeeDto" }]
+          },
+          "category": {
+            "description": "category of the inventory",
+            "allOf": [
+              { "$ref": "#/components/schemas/CreateInvetoryCategoryDto" }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "serial_number",
+          "created_at",
+          "created_by",
+          "updated_at",
+          "updated_by",
+          "deleted_at",
+          "deleted_by",
+          "employee",
+          "category"
+        ]
+      },
+      "UpdateInventoryDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "name of inventory" },
+          "serial_number": {
+            "type": "string",
+            "description": "serial no. of inventory"
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "Id of Category" },
+          "name": { "type": "string", "description": "Name ofCategory" },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date on which Category created"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "Category created By"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "The date on which category updated"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "Category updatyed by"
+          },
+          "deleted_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "the date on which category deleted "
+          },
+          "deleted_by": {
+            "type": "string",
+            "description": "Category deleted by"
+          },
+          "inventories": {
+            "description": "Inventories",
+            "allOf": [{ "$ref": "#/components/schemas/Inventory" }]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "created_at",
+          "created_by",
+          "updated_at",
+          "updated_by",
+          "deleted_at",
+          "deleted_by",
+          "inventories"
+        ]
+      },
+      "CreateProjectDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "name of the project" },
+          "manager_name": {
+            "type": "string",
+            "description": "manager name of the project"
+          },
+          "description": {
+            "type": "string",
+            "description": "description of the project"
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "start date of the project"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "end date of the project"
+          },
+          "status": { "type": "string", "description": "status of the project" }
+        },
+        "required": [
+          "name",
+          "manager_name",
+          "description",
+          "startDate",
+          "endDate",
+          "status"
+        ]
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "Id of project" },
+          "name": { "type": "string", "description": "Name of project" },
+          "manager_name": {
+            "type": "string",
+            "description": "manager_name of project"
+          },
+          "description": {
+            "type": "string",
+            "description": "description of project"
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "start date of project"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "end date of project"
+          },
+          "status": { "type": "string", "description": "status of project" },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "date on which project created"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "project created by"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "the date on which project updated"
+          },
+          "updated_by": {
+            "type": "string",
+            "description": "project updated by"
+          },
+          "deleted_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "the date on which project deleted"
+          },
+          "deleted_by": {
+            "type": "string",
+            "description": "project deleted by"
+          },
+          "employee": {
+            "description": "employees of project",
+            "allOf": [{ "$ref": "#/components/schemas/CreateEmployeeDto" }]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "manager_name",
+          "description",
+          "startDate",
+          "endDate",
+          "status",
+          "created_at",
+          "created_by",
+          "updated_at",
+          "updated_by",
+          "deleted_at",
+          "deleted_by",
+          "employee"
+        ]
+      },
+      "UpdateProjectDto": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "description": "name of the project" },
+          "manager_name": {
+            "type": "string",
+            "description": "manager name of the project"
+          },
+          "description": {
+            "type": "string",
+            "description": "description of the project"
+          },
+          "startDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "start date of the project"
+          },
+          "endDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "end date of the project"
+          },
+          "status": { "type": "string", "description": "status of the project" }
+        }
+      },
+      "AssignProjectDto": {
+        "type": "object",
+        "properties": {
+          "employeeId": { "type": "number", "description": "Id of employee" },
+          "projectId": { "type": "number", "description": "Id of project" }
+        },
+        "required": ["employeeId", "projectId"]
+      },
+      "Holidays": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "number", "description": "id ", "example": "1" },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "description": "occasion date",
+            "example": "2024-01-01"
+          },
+          "day": {
+            "type": "string",
+            "description": "occasion day",
+            "example": "monday"
+          },
+          "occasion": {
+            "type": "string",
+            "description": "occasion name",
+            "example": "New Year"
+          },
+          "image": {
+            "description": "occasion image",
+            "allOf": [{ "$ref": "#/components/schemas/Buffer" }]
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "description": "When holiday was Created"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "Holiday created by"
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "day",
+          "occasion",
+          "image",
+          "created_at",
+          "created_by"
+        ]
+      }
+    }
+  }
+}
